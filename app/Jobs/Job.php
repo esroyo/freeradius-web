@@ -1,6 +1,6 @@
 <?php
 
-namespace Freeradius\Jobs;
+namespace FreeradiusWeb\Jobs;
 
 use Illuminate\Bus\Queueable;
 

@@ -31,7 +31,7 @@ Route::group([
 
 // web
 Route::group([
-    'middleware' => ['web', 'csrf']
+    'middleware' => ['csrf'] // 'web' implicit
 ], function () {
 
 

@@ -67,7 +67,7 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => Freeradius\User::class,
+            'model' => FreeradiusWeb\User::class,
         ],
 
         // 'users' => [

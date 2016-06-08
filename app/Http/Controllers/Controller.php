@@ -1,6 +1,6 @@
 <?php
 
-namespace Freeradius\Http\Controllers;
+namespace FreeradiusWeb\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;

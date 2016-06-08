@@ -1,15 +1,15 @@
 <?php
 
-namespace Freeradius\Http\Controllers\API;
+namespace FreeradiusWeb\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use DB;
 use Carbon\Carbon;
 
-use Freeradius\Http\Controllers\Controller;
-use Freeradius\Radacct;
-use Freeradius\Http\Requests\RadacctReportRequest;
+use FreeradiusWeb\Http\Controllers\Controller;
+use FreeradiusWeb\Radacct;
+use FreeradiusWeb\Http\Requests\RadacctReportRequest;
 
 class RadacctReportController extends Controller
 {

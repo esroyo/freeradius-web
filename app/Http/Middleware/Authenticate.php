@@ -1,6 +1,6 @@
 <?php
 
-namespace Freeradius\Http\Middleware;
+namespace FreeradiusWeb\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;

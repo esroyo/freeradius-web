@@ -1,10 +1,10 @@
 <?php
 
-namespace Freeradius\Http\Requests;
+namespace FreeradiusWeb\Http\Requests;
 
 use Schema;
 use Illuminate\Http\JsonResponse;
-use Freeradius\Http\Requests\Request;
+use FreeradiusWeb\Http\Requests\Request;
 
 class RadacctReportRequest extends Request
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Freeradius\Exceptions;
+namespace FreeradiusWeb\Exceptions;
 
 use Exception;
 use Illuminate\Validation\ValidationException;

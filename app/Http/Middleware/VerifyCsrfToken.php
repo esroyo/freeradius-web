@@ -1,6 +1,6 @@
 <?php
 
-namespace Freeradius\Http\Middleware;
+namespace FreeradiusWeb\Http\Middleware;
 
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken as BaseVerifier;
 

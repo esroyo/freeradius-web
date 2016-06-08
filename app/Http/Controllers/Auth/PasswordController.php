@@ -1,8 +1,8 @@
 <?php
 
-namespace Freeradius\Http\Controllers\Auth;
+namespace FreeradiusWeb\Http\Controllers\Auth;
 
-use Freeradius\Http\Controllers\Controller;
+use FreeradiusWeb\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class PasswordController extends Controller

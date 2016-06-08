@@ -28,17 +28,17 @@ $app = new Illuminate\Foundation\Application(
 
 $app->singleton(
     Illuminate\Contracts\Http\Kernel::class,
-    Freeradius\Http\Kernel::class
+    FreeradiusWeb\Http\Kernel::class
 );
 
 $app->singleton(
     Illuminate\Contracts\Console\Kernel::class,
-    Freeradius\Console\Kernel::class
+    FreeradiusWeb\Console\Kernel::class
 );
 
 $app->singleton(
     Illuminate\Contracts\Debug\ExceptionHandler::class,
-    Freeradius\Exceptions\Handler::class
+    FreeradiusWeb\Exceptions\Handler::class
 );
 
 /*

@@ -1,6 +1,6 @@
 <?php
 
-namespace Freeradius\Http\Middleware;
+namespace FreeradiusWeb\Http\Middleware;
 
 use Illuminate\Cookie\Middleware\EncryptCookies as BaseEncrypter;
 

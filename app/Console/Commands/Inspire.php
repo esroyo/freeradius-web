@@ -1,6 +1,6 @@
 <?php
 
-namespace Freeradius\Console\Commands;
+namespace FreeradiusWeb\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Foundation\Inspiring;

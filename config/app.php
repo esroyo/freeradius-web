@@ -151,10 +151,10 @@ return [
         /*
          * Application Service Providers...
          */
-        Freeradius\Providers\AppServiceProvider::class,
-        Freeradius\Providers\AuthServiceProvider::class,
-        Freeradius\Providers\EventServiceProvider::class,
-        Freeradius\Providers\RouteServiceProvider::class,
+        FreeradiusWeb\Providers\AppServiceProvider::class,
+        FreeradiusWeb\Providers\AuthServiceProvider::class,
+        FreeradiusWeb\Providers\EventServiceProvider::class,
+        FreeradiusWeb\Providers\RouteServiceProvider::class,
 
         /*
          * Other

@@ -1,6 +1,6 @@
 <?php
 
-namespace Freeradius\Http\Middleware;
+namespace FreeradiusWeb\Http\Middleware;
 
 use Closure;
 use Auth;
@@ -19,7 +19,8 @@ class ThrottleNonAdministrators extends ThrottleRequests
      */
     public function handle($request, Closure $next, $maxAttemps = 60, $decayMinutes = 1)
     {
-        if (Auth::guard('api')->user()->isAdministrator()) {
+        $user = Auth::guard('api')->user();
+        if ($user && $user->isAdministrator()) {
             // don't throttle at all
             return $next($request);
         } else {

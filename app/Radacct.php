@@ -1,6 +1,6 @@
 <?php
 
-namespace Freeradius;
+namespace FreeradiusWeb;
 
 use Illuminate\Database\Eloquent\Model;
 

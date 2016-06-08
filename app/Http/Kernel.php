@@ -1,6 +1,6 @@
 <?php
 
-namespace Freeradius\Http;
+namespace FreeradiusWeb\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -24,15 +24,15 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
-            \Freeradius\Http\Middleware\EncryptCookies::class,
+            \FreeradiusWeb\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
         ],
 
         'api' => [
-            'throttle.plebs:60,1',
             'auth:api',
+            'throttle.plebs:60,1',
         ],
     ];
 
@@ -44,12 +44,12 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
-        'auth' => \Freeradius\Http\Middleware\Authenticate::class,
+        'auth' => \FreeradiusWeb\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'can' => \Illuminate\Foundation\Http\Middleware\Authorize::class,
-        'guest' => \Freeradius\Http\Middleware\RedirectIfAuthenticated::class,
-        'csrf' => \Freeradius\Http\Middleware\VerifyCsrfToken::class,
+        'guest' => \FreeradiusWeb\Http\Middleware\RedirectIfAuthenticated::class,
+        'csrf' => \FreeradiusWeb\Http\Middleware\VerifyCsrfToken::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'throttle.plebs' => \Freeradius\Http\Middleware\ThrottleNonAdministrators::class,
+        'throttle.plebs' => \FreeradiusWeb\Http\Middleware\ThrottleNonAdministrators::class,
     ];
 }

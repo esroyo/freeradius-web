@@ -1,6 +1,6 @@
 <?php
 
-namespace Freeradius\Providers;
+namespace FreeradiusWeb\Providers;
 
 use Illuminate\Contracts\Events\Dispatcher as DispatcherContract;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -13,8 +13,8 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'Freeradius\Events\SomeEvent' => [
-            'Freeradius\Listeners\EventListener',
+        'FreeradiusWeb\Events\SomeEvent' => [
+            'FreeradiusWeb\Listeners\EventListener',
         ],
     ];
 

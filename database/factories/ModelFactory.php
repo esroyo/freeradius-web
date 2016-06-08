@@ -11,7 +11,7 @@
 |
 */
 
-$factory->define(Freeradius\User::class, function (Faker\Generator $faker) {
+$factory->define(FreeradiusWeb\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->safeEmail,

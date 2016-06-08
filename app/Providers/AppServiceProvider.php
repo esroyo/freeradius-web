@@ -1,6 +1,6 @@
 <?php
 
-namespace Freeradius\Providers;
+namespace FreeradiusWeb\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

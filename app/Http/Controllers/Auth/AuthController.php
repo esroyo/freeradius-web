@@ -1,10 +1,10 @@
 <?php
 
-namespace Freeradius\Http\Controllers\Auth;
+namespace FreeradiusWeb\Http\Controllers\Auth;
 
-use Freeradius\User;
+use FreeradiusWeb\User;
 use Validator;
-use Freeradius\Http\Controllers\Controller;
+use FreeradiusWeb\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 

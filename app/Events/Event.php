@@ -1,6 +1,6 @@
 <?php
 
-namespace Freeradius\Events;
+namespace FreeradiusWeb\Events;
 
 abstract class Event
 {

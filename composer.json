@@ -21,7 +21,7 @@
             "database"
         ],
         "psr-4": {
-            "Freeradius\\": "app/"
+            "FreeradiusWeb\\": "app/"
         }
     },
     "autoload-dev": {
