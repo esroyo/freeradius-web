@@ -11,17 +11,41 @@
 |
 */
 
+
+// api
 Route::group([
-    'prefix' => 'api',
-    'namespace' => 'API'
+    'prefix' => 'api/v1',
+    'namespace' => 'API',
+    'middleware' => ['api']
 ], function () {
 
     Route::group([
         'prefix' => 'reports'
     ], function () {
-
-        Route::get('/radacct', 'RadacctReportController@show');
+        // TODO: enforce post to get with a api_token?
+        Route::any('/radacct', 'RadacctReportController@show');
 
     });
+
+});
+
+// web
+Route::group([
+    'middleware' => ['web', 'csrf']
+], function () {
+
+
+    // Authentication
+    Route::get('login', 'Auth\AuthController@getLogin');
+    Route::post('login', 'Auth\AuthController@postLogin');
+    Route::get('logout', 'Auth\AuthController@logout');
+
+    // Registration
+    // Route::get('register', 'Auth\AuthController@getRegister');
+    // Route::post('register', 'Auth\AuthContoller@postRegister');
+
+    Route::get('/', function () {
+        return view('welcome');
+    })->middleware(['auth']);
 
 });

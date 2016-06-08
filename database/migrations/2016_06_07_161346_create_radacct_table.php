@@ -12,7 +12,11 @@ class CreateRadacctTable extends Migration
      */
     public function up()
     {
-        Schema::create('radacct', function($table) {
+        if (Schema::hasTable('radacct')) {
+            return;
+        }
+
+        Schema::create('radacct', function(Blueprint $table) {
             $table->bigIncrements('radacctid');
 			$table->string('acctsessionid', 64)->default('');
   			$table->string('acctuniqueid', 32)->default('');
@@ -38,7 +42,7 @@ class CreateRadacctTable extends Migration
    			$table->string('servicetype', 32)->default(null)->nullable();
    			$table->string('framedprotocol', 32)->default(null)->nullable();
    			$table->string('framedipaddress', 15)->default('');
-			// $table->primary('radacctid');
+			// $table->primary('radacctid'); // implicit
 			$table->unique('acctuniqueid');
   			$table->index('username');
   			$table->index('framedipaddress');

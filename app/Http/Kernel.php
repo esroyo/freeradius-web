@@ -28,11 +28,11 @@ class Kernel extends HttpKernel
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \Freeradius\Http\Middleware\VerifyCsrfToken::class,
         ],
 
         'api' => [
-            'throttle:60,1',
+            'throttle.plebs:60,1',
+            'auth:api',
         ],
     ];
 
@@ -48,6 +48,8 @@ class Kernel extends HttpKernel
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'can' => \Illuminate\Foundation\Http\Middleware\Authorize::class,
         'guest' => \Freeradius\Http\Middleware\RedirectIfAuthenticated::class,
+        'csrf' => \Freeradius\Http\Middleware\VerifyCsrfToken::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'throttle.plebs' => \Freeradius\Http\Middleware\ThrottleNonAdministrators::class,
     ];
 }
