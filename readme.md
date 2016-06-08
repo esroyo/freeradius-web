@@ -96,7 +96,7 @@ Comma sepparated list of:
 #### dimension
 
 ```
-dimension=usernamehttp://freeradius.org/
+dimension=username
 ```
 
 One of:
