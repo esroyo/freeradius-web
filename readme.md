@@ -1,5 +1,7 @@
 # Freeradius Web
 
+[![Circle CI](https://circleci.com/gh/esroyo/freeradius-web.svg?style=svg)](https://circleci.com/gh/esroyo/freeradius-web)
+
 API to your [Freeradius](http://freeradius.org) stats.
 
 ## Install
