@@ -31,6 +31,12 @@ class RadacctReportControllerTest extends TestCase
             'acctstoptime' => '2016-05-21 00:31:18',
             'acctsessiontime' =>  5,
             'username' => 'tester'
+        ], [
+            'acctuniqueid' => str_random(32),
+            'acctstarttime' => '2016-05-21 00:31:19',
+            'acctstoptime' => '2016-05-21 00:31:19', // test with no duration
+            'acctsessiontime' =>  1,
+            'username' => 'tester'
         ]]);
 
         $expected = [

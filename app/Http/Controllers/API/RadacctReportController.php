@@ -199,7 +199,7 @@ class RadacctReportController extends Controller
 
         // if (granularity === 'day'):
         // split/aggregate sessions into days
-        $sessionduration = $stoptime->diffInSeconds($starttime);
+        $sessionduration = max(1, $stoptime->diffInSeconds($starttime));
         $upperlimit = $stoptime->copy()->modify('+1 day');
         $checkpoint = $starttime->copy()->modify('+1 day, midnight, -1 sec');
         
