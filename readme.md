@@ -2,7 +2,11 @@
 
 [![Circle CI](https://circleci.com/gh/esroyo/freeradius-web.svg?style=svg)](https://circleci.com/gh/esroyo/freeradius-web)
 
-API to your [Freeradius](http://freeradius.org) stats.
+An  API to [Freeradius](http://freeradius.org) stats. Build on [Laravel](https://laravel.com).
+_Note: very early stage of development._
+
+## Features
+* Access radius account session activity data by session, day or total.
 
 ## Install
 Clone and install dependencies:
@@ -11,13 +15,14 @@ git clone https://github.com/esroyo/freeradius-web.git
 cd freeradius-web
 composer install
 ```
-Copy .env file and fill the freeradius mysql database information:
+Copy .env file and fill the **freeradius mysql database** information:
 ```
 cp .env.example .env
 vim .env
 ```
 Create/populate the database:
 ```
+php artisan key:generate
 php artisan migrate --seed
 ```
 
@@ -31,11 +36,56 @@ php -S localhost:8080
 Copy an `api_token` from the `users` table (`SELECT api_token FROM users LIMIT 1`).
 Then replace `_YOUR_API_TOKEN_` in the following command example:
 ```
-curl -X POST -d 'start_date=20160520' -d 'end_date=20160530' -d 'timezone=UTC' -d 'granularity=day' -d 'metrics=sessiontime,inputoctets,outputoctets' -d 'dimension=username' -d 'api_token=_YOUR_API_TOKEN_' http://localhost:8080/api/v1/reports/radacct
+curl -H "Authorization: Bearer _YOUR_API_TOKEN_" "http://localhost:8080/api/v1/reports/radacct?start_date=20160520&end_date=20160521&timezone=Europe/Berlin&granularity=day&metrics=sessiontime,inputoctets,outputoctets&dimension=username"
 ```
-You'll get some JSON, provided that you have some data on your `radacct` table for the requested dates ;)
+You'll get something, provided that you have data on your `radacct` table for the requested dates ;)
+```json
+{
+    "user1": [
+        {
+            "starttime": "2016-05-20 00:00:00",
+            "stoptime": "2016-05-20 23:59:59",
+            "sessiontime": 49962,
+            "inputoctets": 26339924,
+            "outputoctets": 11710366
+        },
+        {
+            "starttime": "2016-05-21 00:00:00",
+            "stoptime": "2016-05-21 23:59:59",
+            "sessiontime": 1872,
+            "inputoctets": 4323,
+            "outputoctets": 6
+        }
+    ],
+    "user2": [
+        {
+            "starttime": "2016-05-20 00:00:00",
+            "stoptime": "2016-05-20 23:59:59",
+            "sessiontime": 6116,
+            "inputoctets": 17304613,
+            "outputoctets": 495135809
+        }
+    ]
+}
+```
 
 ## API
+
+### Authorization
+Requires to past the user `api_token` in the headers of your HTTP request:
+
+```
+Authorization: Bearer ZvVYXghie6kIpBCK5oLnXkx8ZrrfL9hVlnJztry9vdtvXXtxnPnRgfDgcgJ7DcFi
+```
+
+_Note this is only secure if you are serving under HTTPS._
+
+#### Authorization under testing environment
+For testing propouses you could pass the `api_token` as another query string parameter of the GET requests. Note this makes your token public when hitting the wire.
+```
+api_token=ZvVYXghie6kIpBCK5oLnXkx8ZrrfL9hVlnJztry9vdtvXXtxnPnRgfDgcgJ7DcFi
+```
+
 
 ### Radacct parameters
 

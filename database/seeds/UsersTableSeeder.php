@@ -3,7 +3,7 @@
 namespace Database\Seeds;
 
 use Illuminate\Database\Seeder;
-use Freeradius\User;
+use FreeradiusWeb\User;
 
 class UsersTableSeeder extends Seeder
 {

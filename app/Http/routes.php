@@ -22,8 +22,7 @@ Route::group([
     Route::group([
         'prefix' => 'reports'
     ], function () {
-        // TODO: enforce post to get with a api_token?
-        Route::any('/radacct', 'RadacctReportController@show');
+        Route::get('/radacct', 'RadacctReportController@show');
 
     });
 

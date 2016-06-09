@@ -1,0 +1,13 @@
+machine:
+  timezone: Etc/UTC 
+  php:
+    version: 7.0.4
+
+dependencies:
+  override:
+    - composer install --prefer-source --no-interaction --no-dev
+
+test:
+  pre:
+    - cp .env.example .env
+    - php artisan key:generate

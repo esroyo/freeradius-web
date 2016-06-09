@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-use Freeradius\Http\Controllers\API\RadacctReportController as RadacctReport;
+use FreeradiusWeb\Http\Controllers\API\RadacctReportController as RadacctReport;
+use FreeradiusWeb\User;
 
 class RadacctReportControllerTest extends TestCase
 {
@@ -18,6 +18,7 @@ class RadacctReportControllerTest extends TestCase
     public function testGranularize()
     {
         // seed
+        $this->seed();
         DB::table('radacct')->insert([[
             'acctuniqueid' => str_random(32),
             'acctstarttime' => '2016-05-20 19:47:51',
@@ -45,13 +46,15 @@ class RadacctReportControllerTest extends TestCase
             ]
         ];
 
+        $user = User::where('name', '=', 'admin')->first();
 
-        $this->get('/api/reports/radacct?' . http_build_query([
+        $this->get('/api/v1/reports/radacct?' . http_build_query([
             'start_date' => '20160520',
             'end_date' => '20160522',
             'timezone' => 'UTC',
             'metrics' => 'sessiontime',
             'granularity' => 'day'
-        ]))->seeJson($expected);
+        ]), ['HTTP_Authorization' => "Bearer {$user->api_token}"])
+            ->seeJson($expected);
     }
 }

@@ -18,7 +18,7 @@ class AddApiTokenColumnToUsers extends Migration
 
         Schema::table('users', function(Blueprint $table) {
             $table->string('api_token', 64)->unique()
-                ->after('password');
+                ->nullable()->after('password');
         });
     }
 
