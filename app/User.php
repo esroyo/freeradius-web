@@ -3,8 +3,10 @@
 namespace FreeradiusWeb;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable
+class User extends Authenticatable implements
+    JWTSubject
 {
     /**
      * The attributes that are mass assignable.
@@ -21,12 +23,29 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'api_token'
     ];
 
     protected $casts = [
         'is_admin' => 'boolean',
     ];
+
+  
+    /**
+     * @return mixed
+     */
+    public function getJWTIdentifier()
+    {
+        return $this->getKey(); // Eloquent model method
+    }
+
+    /**
+     * @return array
+     */
+    public function getJWTCustomClaims()
+    {
+        return [];
+    }  
 
     public function isAdministrator()
     {

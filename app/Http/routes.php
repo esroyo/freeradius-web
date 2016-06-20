@@ -14,37 +14,32 @@
 
 // api
 Route::group([
-    'prefix' => 'api/v1',
-    'namespace' => 'API',
-    'middleware' => ['api']
+    'prefix' => 'api',
+    'middleware' => ['request.accept:application/json'],
 ], function () {
 
-    Route::group([
-        'prefix' => 'reports'
-    ], function () {
-        Route::get('/radacct', 'RadacctReportController@show');
+    Route::post('login', 'Auth\AuthController@login');
+    Route::post('signup', 'Auth\AuthController@register');
+    Route::get('logout', 'Auth\AuthController@logout');
 
+    Route::group([
+        'prefix' => 'v1',
+        'namespace' => 'API',
+        'middleware' => ['api'],
+    ], function () {
+        Route::get('/radacct', 'RadacctController@show');
     });
 
 });
 
 // web
 Route::group([
-    'middleware' => ['csrf'] // 'web' implicit
+    'middleware' => ['web'] // 'web' implicit
 ], function () {
 
-
-    // Authentication
-    Route::get('login', 'Auth\AuthController@getLogin');
-    Route::post('login', 'Auth\AuthController@postLogin');
-    Route::get('logout', 'Auth\AuthController@logout');
-
-    // Registration
-    // Route::get('register', 'Auth\AuthController@getRegister');
-    // Route::post('register', 'Auth\AuthContoller@postRegister');
-
-    Route::get('/', function () {
-        return view('welcome');
-    })->middleware(['auth']);
+    // Route::auth();
+    // Route::get('/home', 'HomeController@index');
+    // Route::get('/', 'HomeController@index');
+    // TODO: web shows api doc
 
 });

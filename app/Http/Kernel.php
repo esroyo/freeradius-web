@@ -15,6 +15,7 @@ class Kernel extends HttpKernel
      */
     protected $middleware = [
         \Illuminate\Foundation\Http\Middleware\CheckForMaintenanceMode::class,
+        \Barryvdh\Cors\HandleCors::class,
     ];
 
     /**
@@ -28,9 +29,11 @@ class Kernel extends HttpKernel
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+            \FreeradiusWeb\Http\Middleware\VerifyCsrfToken::class,
         ],
 
         'api' => [
+            'request.accept:application/json',
             'auth:api',
             'throttle.plebs:60,1',
         ],
@@ -44,11 +47,11 @@ class Kernel extends HttpKernel
      * @var array
      */
     protected $routeMiddleware = [
+        'request.accept' => \FreeradiusWeb\Http\Middleware\RequestAccept::class,
         'auth' => \FreeradiusWeb\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'can' => \Illuminate\Foundation\Http\Middleware\Authorize::class,
         'guest' => \FreeradiusWeb\Http\Middleware\RedirectIfAuthenticated::class,
-        'csrf' => \FreeradiusWeb\Http\Middleware\VerifyCsrfToken::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'throttle.plebs' => \FreeradiusWeb\Http\Middleware\ThrottleNonAdministrators::class,
     ];

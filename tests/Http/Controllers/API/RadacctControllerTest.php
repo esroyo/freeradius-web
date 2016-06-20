@@ -3,10 +3,10 @@
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-use FreeradiusWeb\Http\Controllers\API\RadacctReportController as RadacctReport;
+use FreeradiusWeb\Http\Controllers\API\RadacctController;
 use FreeradiusWeb\User;
 
-class RadacctReportControllerTest extends TestCase
+class RadacctControllerTest extends TestCase
 {
     use DatabaseMigrations;
 
@@ -53,14 +53,15 @@ class RadacctReportControllerTest extends TestCase
         ];
 
         $user = User::where('name', '=', 'admin')->first();
+        $token = JWTAuth::fromUser($user);
 
-        $this->get('/api/v1/reports/radacct?' . http_build_query([
+        $this->get('/api/v1/radacct?' . http_build_query([
             'start_date' => '20160520',
             'end_date' => '20160522',
             'timezone' => 'UTC',
             'metrics' => 'sessiontime',
             'granularity' => 'day'
-        ]), ['HTTP_Authorization' => "Bearer {$user->api_token}"])
+        ]), ['HTTP_Authorization' => "Bearer $token"])
             ->seeJson($expected);
     }
 }

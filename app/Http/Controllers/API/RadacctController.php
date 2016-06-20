@@ -9,9 +9,9 @@ use Carbon\Carbon;
 
 use FreeradiusWeb\Http\Controllers\Controller;
 use FreeradiusWeb\Radacct;
-use FreeradiusWeb\Http\Requests\RadacctReportRequest;
+use FreeradiusWeb\Http\Requests\RadacctRequest;
 
-class RadacctReportController extends Controller
+class RadacctController extends Controller
 {
     const PREFIX = 'acct';
     const ERROR_NOREQUEST = 'No valid request has been set in the controller';
@@ -23,10 +23,10 @@ class RadacctReportController extends Controller
     /**
      * Output the report.
      *
-     * @param RadacctReportRequest $request
+     * @param RadacctRequest $request
      * @return Response
      */
-    public function show(RadacctReportRequest $request)
+    public function show(RadacctRequest $request)
     {
         return $this->setRequest($request)
             ->fetchData()
@@ -48,9 +48,9 @@ class RadacctReportController extends Controller
     /**
      * Set request to work with.
      *
-     * @return RadacctReportController
+     * @return RadacctController
      */
-    protected function setRequest(RadacctReportRequest $request)
+    protected function setRequest(RadacctRequest $request)
     {
         $this->request = $request;
         return $this;
@@ -60,7 +60,7 @@ class RadacctReportController extends Controller
      * Fetch data for the report.
      *
      * @throws \Exception If no request has been previously set
-     * @return RadacctReportController
+     * @return RadacctController
      */
     protected function fetchData()
     {
@@ -127,7 +127,7 @@ class RadacctReportController extends Controller
      * Format data for the report.
      *
      * @throws  \Exception If no data has been previously fetched
-     * @return RadacctReportController
+     * @return RadacctController
      */
     protected function formatData()
     {
@@ -226,7 +226,7 @@ class RadacctReportController extends Controller
 
     protected function checkRequestOrFail()
     { 
-    if (!$this->request instanceof RadacctReportRequest) {
+    if (!$this->request instanceof RadacctRequest) {
             throw new \Exception(static::ERROR_NOREQUEST);
         }
     }
@@ -238,10 +238,10 @@ class RadacctReportController extends Controller
         }
     }
 
-    protected function parseFilters(RadacctReportRequest $request)
+    protected function parseFilters(RadacctRequest $request)
     {
         $filters = [];
-        $operators = RadacctReportRequest::operators();
+        $operators = RadacctRequest::operators();
         $pattern = '/^
             (?<column>[[:alnum:]]+)
             (?<operator>(' . implode('|', array_keys($operators)) . '))
@@ -249,7 +249,7 @@ class RadacctReportController extends Controller
         $/x';
 
         foreach (explode(',', $request->filters) as $filter) {
-            preg_match($pattern, $filter, $m); // validated by RadacctReportRequest
+            preg_match($pattern, $filter, $m); // validated by RadacctRequest
             $filters[] = [
                 'column' => $m['column'],
                 'operator' => $operators[$m['operator']],
@@ -260,7 +260,7 @@ class RadacctReportController extends Controller
         return $filters;
     }
 
-    protected function parseMetrics(RadacctReportRequest $request)
+    protected function parseMetrics(RadacctRequest $request)
     {
         $columns = [];
         $total = $request->granularity === 'total';

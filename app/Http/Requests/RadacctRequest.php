@@ -6,7 +6,7 @@ use Schema;
 use Illuminate\Http\JsonResponse;
 use FreeradiusWeb\Http\Requests\Request;
 
-class RadacctReportRequest extends Request
+class RadacctRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.

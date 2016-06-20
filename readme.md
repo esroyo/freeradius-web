@@ -33,10 +33,14 @@ cd public
 php -S localhost:8080
 ```
 
-Copy an `api_token` from the `users` table (`SELECT api_token FROM users LIMIT 1`).
-Then replace `_YOUR_API_TOKEN_` in the following command example:
+Login and obtain a Json Web Token:
 ```
-curl -H "Authorization: Bearer _YOUR_API_TOKEN_" "http://localhost:8080/api/v1/reports/radacct?start_date=20160520&end_date=20160521&timezone=Europe/Berlin&granularity=day&metrics=sessiontime,inputoctets,outputoctets&dimension=username"
+curl -X POST -H "Content-type: application/json" --data '{"email":"admin@localhost","password":"admin"}' http://localhost:8080/api/login
+```
+
+Copy the response `token` and replace `_JWT_TOKEN_` in the following command example:
+```
+curl -H "Authorization: Bearer _JWT_TOKEN_" "http://localhost:8080/api/v1/radacct?start_date=20160520&end_date=20160521&timezone=Europe/Berlin&granularity=day&metrics=sessiontime,inputoctets,outputoctets&dimension=username"
 ```
 You'll get something, provided that you have data on your `radacct` table for the requested dates ;)
 ```json
@@ -72,20 +76,11 @@ You'll get something, provided that you have data on your `radacct` table for th
 ## API
 
 ### Authorization
-Requires to past the user `api_token` in the headers of your HTTP request:
+Requires to past a valid Json Web Token in the headers of your HTTP request:
 
 ```
-Authorization: Bearer ZvVYXghie6kIpBCK5oLnXkx8ZrrfL9hVlnJztry9vdtvXXtxnPnRgfDgcgJ7DcFi
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vbG9jYWxob3N0OjgwODAvYXBpL2xvZ2luIiwiaWF0IjoxNDY2NDM3Mjk1LCJleHAiOjE0NjY0NDA4OTUsIm5iZiI6MTQ2NjQzNzI5NSwianRpIjoiYzE1MmYwZWQ3ZGM5YzMzMTQ1Yzk3YzM1NTk0MTY3ODciLCJzdWIiOjV9.v4bVMnR4Op7rnOgAhcYedjN-TUUz6kw92ll-ysbq8Yc
 ```
-
-_Note this is only secure if you are serving under HTTPS._
-
-#### Authorization under testing environment
-For testing propouses you could pass the `api_token` as another query string parameter of the GET requests. Note this makes your token public when hitting the wire.
-```
-api_token=ZvVYXghie6kIpBCK5oLnXkx8ZrrfL9hVlnJztry9vdtvXXtxnPnRgfDgcgJ7DcFi
-```
-
 
 ### Radacct parameters
 
