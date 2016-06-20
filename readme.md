@@ -23,6 +23,7 @@ vim .env
 Create/populate the database:
 ```
 php artisan key:generate
+php artisan jwt:secret
 php artisan migrate --seed
 ```
 
