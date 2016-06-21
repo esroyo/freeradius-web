@@ -40,15 +40,18 @@ class RadacctControllerTest extends TestCase
         ]]);
 
         $expected = [
-            [
-                'starttime' => '2016-05-20 00:00:00',
-                'stoptime' => '2016-05-20 23:59:59',
-                'sessiontime' =>  15128
-            ],
-            [
-                'starttime' => '2016-05-21 00:00:00',
-                'stoptime' => '2016-05-21 23:59:59',
-                'sessiontime' =>  1877 // 1872 + 5
+            'error' => false,
+            'data' => [
+                [
+                    'starttime' => '2016-05-20 00:00:00',
+                    'stoptime' => '2016-05-20 23:59:59',
+                    'sessiontime' =>  15128
+                ],
+                [
+                    'starttime' => '2016-05-21 00:00:00',
+                    'stoptime' => '2016-05-21 23:59:59',
+                    'sessiontime' =>  1877 // 1872 + 5
+                ]
             ]
         ];
 
