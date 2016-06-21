@@ -142,11 +142,11 @@ class AuthController extends Controller
     protected function sendFailedLoginResponse(Request $request)
     {
         if ($this->wantsJwt()) {
-            $errors = [[
-                'code' => 'AUTH_FAILED',
-                'message' => $this->getFailedLoginMessage()
-            ]];
-            return response()->json(compact('errors'), Response::HTTP_UNAUTHORIZED);
+            return response()->error(
+                $this->getFailedMessage(),
+                Response::HTTP_UNAUTHORIZED,
+                'AUTH_FAILED'
+            );
         } else {
             return redirect()->back()
                 ->withInput($request->only($this->loginUsername(), 'remember'))

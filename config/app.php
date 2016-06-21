@@ -155,6 +155,7 @@ return [
         FreeradiusWeb\Providers\AuthServiceProvider::class,
         FreeradiusWeb\Providers\EventServiceProvider::class,
         FreeradiusWeb\Providers\RouteServiceProvider::class,
+        FreeradiusWeb\Providers\ResponseMacroServiceProvider::class,
 
         /*
          * Other

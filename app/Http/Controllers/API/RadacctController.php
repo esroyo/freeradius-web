@@ -28,10 +28,12 @@ class RadacctController extends Controller
      */
     public function show(RadacctRequest $request)
     {
-        return $this->setRequest($request)
-            ->fetchData()
-            ->formatData()
-            ->get();
+        return response()->success(
+            $this->setRequest($request)
+                ->fetchData()
+                ->formatData()
+                ->get()
+            );
     }
 
     /**
@@ -226,7 +228,7 @@ class RadacctController extends Controller
 
     protected function checkRequestOrFail()
     { 
-    if (!$this->request instanceof RadacctRequest) {
+        if (!$this->request instanceof RadacctRequest) {
             throw new \Exception(static::ERROR_NOREQUEST);
         }
     }
